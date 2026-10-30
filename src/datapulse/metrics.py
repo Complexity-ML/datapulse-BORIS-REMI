@@ -10,3 +10,9 @@ def revenue_by_region(df: pd.DataFrame) -> pd.Series:
 def total_revenue(df: pd.DataFrame) -> float:
     """Chiffre d'affaires total."""
     return round(float(df["montant"].sum()), 2)
+
+
+def average_basket(df: pd.DataFrame) -> pd.Series:
+    """Panier moyen par region."""
+    result = df.groupby("region")["montant"].mean()
+    return result.round(2).sort_values(ascending=False)

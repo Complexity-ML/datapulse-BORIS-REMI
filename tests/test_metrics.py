@@ -19,3 +19,9 @@ def test_revenue_by_region():
 
 def test_total_revenue():
     assert total_revenue(df_exemple()) == 230.0
+
+
+def test_average_basket():
+    from datapulse.metrics import average_basket
+    result = average_basket(df_exemple())
+    assert result["Occitanie"] == 75.0

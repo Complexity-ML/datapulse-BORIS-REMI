@@ -21,3 +21,9 @@ def average_basket(df: pd.DataFrame) -> pd.Series:
 def sales_by_category(df: pd.DataFrame) -> pd.Series:
     """Nombre de ventes par categorie, du plus vendu au moins vendu."""
     return df.groupby("categorie").size().sort_values(ascending=False)
+
+
+
+def sales_by_region(df: pd.DataFrame) -> pd.Series:
+    """Nombre de ventes par region, de la plus active a la moins active."""
+    return df.groupby("region").size().sort_values(ascending=False)

@@ -25,3 +25,10 @@ def test_average_basket():
     from datapulse.metrics import average_basket
     result = average_basket(df_exemple())
     assert result["Occitanie"] == 75.0
+
+
+def test_sales_by_category():
+    from datapulse.metrics import sales_by_category
+    result = sales_by_category(df_exemple())
+    assert result["Informatique"] == 2
+    assert result["Electromenager"] == 1

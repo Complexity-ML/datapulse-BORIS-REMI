@@ -27,3 +27,21 @@ def sales_by_category(df: pd.DataFrame) -> pd.Series:
 def sales_by_region(df: pd.DataFrame) -> pd.Series:
     """Nombre de ventes par region, de la plus active a la moins active."""
     return df.groupby("region").size().sort_values(ascending=False)
+
+
+def revenue_share_by_category(df: pd.DataFrame) -> pd.Series:
+    """Part du CA par categorie en %, decroissante, arrondie a 2 decimales.
+
+    Les lignes sans categorie sont exclues du calcul, y compris du total.
+    Renvoie une serie vide sans categorie et leve ValueError si le CA total
+    des categories est nul : les pourcentages seraient alors indefinis.
+    """
+    result = df.groupby("categorie")["montant"].sum()
+    if result.empty:
+        return result.astype(float)
+
+    total = result.sum()
+    if total == 0:
+        raise ValueError("La part du CA est indefinie : le chiffre d'affaires total est nul.")
+
+    return (result / total * 100).round(2).sort_values(ascending=False)
